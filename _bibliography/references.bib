@@ -1,0 +1,72 @@
+---
+---
+
+@string{aps = {American Physical Society,}}
+
+@article{tehraninasab2025language,
+  title={Language-Guided Trajectory Traversal in Disentangled Stable Diffusion Latent Space for Factorized Medical Image Generation},
+  author={TehraniNasab, Zahra and Kumar, Amar and Arbel, Tal},
+  journal={Mechanistic Interpretability Workshop (MIV) [Proceeding Track] held in conjunction with IEEE / CVF Computer Vision and Pattern Recognition Conference (CVPR), Nashville, USA, June 10-17, 2025},
+  year={2025},
+  preview={trajectory-traversal.jpg},
+  abstract={Text-to-image diffusion models have demonstrated a remarkable ability to generate photorealistic images from natural language prompts. These high-resolution, language-guided synthesized images are essential for the explainability of disease or exploring causal relationships. However, their potential for disentangling and controlling latent factors of variation in specialized domains like medical imaging remains under-explored. In this work, we present the first investigation of the power of pre-trained vision-language foundation models, once fine-tuned on medical image datasets, to perform latent disentanglement for factorized medical image generation and interpolation. Through extensive experiments on chest X-ray and skin datasets, we illustrate that fine-tuned, language-guided Stable Diffusion inherently learns to factorize key attributes for image generation, such as the patient's anatomical structures or disease diagnostic features. We devise a framework to identify, isolate, and manipulate key attributes through latent space trajectory traversal of generative models, facilitating precise control over medical image synthesis.},
+  arxiv={2503.23623},
+  abbr={MIV - CVPR 2025},
+  website={https://tehraninasab.github.io/sd-latent-traversal/}
+}
+
+@article{saremi2025rl4med,
+  title={RL4Med-DDPO: Reinforcement Learning for Controlled Guidance Towards Diverse Medical Image Generation using Vision-Language Foundation Models},
+  author={Saremi, Parham and Kumar, Amar and Mohammed, Mohammed and TehraniNasab, Zahra and Arbel, Tal},
+  journal={arXiv preprint arXiv:2503.15784},
+  year={2025},
+  preview={rl-sd.jpg},
+  abstract={Vision-Language Foundation Models (VLFM) have shown a tremendous increase in performance in terms of generating high-resolution, photorealistic natural images. While VLFMs show a rich understanding of semantic content across modalities, they often struggle with fine-grained alignment tasks that require precise correspondence between image regions and textual descriptions a limitation in medical imaging, where accurate localization and detection of clinical features are essential for diagnosis and analysis. To address this issue, we propose a multi-stage architecture where a pre-trained VLFM provides a cursory semantic understanding, while a reinforcement learning (RL) algorithm refines the alignment through an iterative process that optimizes for understanding semantic context. The reward signal is designed to align the semantic information of the text with synthesized images. We demonstrate the effectiveness of our method on a medical imaging skin dataset where the generated images exhibit improved generation quality and alignment with prompt over the fine-tuned Stable Diffusion. We also show that the synthesized samples could be used to improve disease classifier performance for underrepresented subgroups through augmentation.},
+  arxiv={2503.15784},
+  abbr={In Review}
+}
+
+@inproceedings{tehraninasab2025pixels,
+  author       = {TehraniNasab, Z. and Kumar, A. and Arbel, T.},
+  title        = {Pixels Under Pressure: Exploring Fine-Tuning Paradigms for Foundation Models in High-Resolution Medical Imaging},
+  booktitle    = {Emerging LLM/LMM Applications in Medical Imaging (ELAMI) - Medical Image Computing and Computer Assisted Intervention – MICCAI 2025},
+  year         = {2025},
+  organization = {MICCAI},
+  note         = {Accepted to ELAMI workshop at MICCAI 2025},
+}
+
+@article{tehraninasab2025pixel,
+  title={Pixel Perfect MegaMed: A Megapixel-Scale Vision-Language Foundation Model for Generating High Resolution Medical Images},
+  author={TehraniNasab, Zahra and Kumar, Amar and Arbel, Tal},
+  booktitle    = {Deep Generative Models for Medical Image Computing and Computer Assisted Intervention – DGM4MICCAI 2025},
+  year={2025}
+}
+
+@article{saadatnejad2024toward,
+  title={Toward reliable human pose forecasting with uncertainty},
+  author={Saadatnejad, Saeed and Mirmohammadi, Mehrshad and Daghyani, Matin and Saremi, Parham and Benisi, Yashar Zoroofchi and Alimohammadi, Amirhossein and Tehraninasab, Zahra and Mordan, Taylor and Alahi, Alexandre},
+  journal={IEEE Robotics and Automation Letters},
+  year={2024},
+  publisher={IEEE},
+  preview={pose-prediction-uncertainty.png},
+  abstract={Recently, there has been an arms race of pose forecasting methods aimed at solving the spatio-temporal task of predicting a sequence of future 3D poses of a person given a sequence of past observed ones. However, the lack of unified benchmarks and limited uncertainty analysis have hindered progress in the field. To address this, we first develop an open-source library for human pose forecasting, including multiple models, supporting several datasets, and employing standardized evaluation metrics, with the aim of promoting research and moving toward a unified and consistent evaluation. Second, we devise two types of uncertainty in the problem to increase performance and convey better trust: 1) we propose a method for modeling aleatoric uncertainty by using uncertainty priors to inject knowledge about the pattern of uncertainty. This focuses the capacity of the model in the direction of more meaningful supervision while reducing the number of learned parameters and improving stability; 2) we introduce a novel approach for quantifying the epistemic uncertainty of any model through clustering and measuring the entropy of its assignments. Our experiments demonstrate up to 25% improvements in forecasting at short horizons, with no loss on longer horizons on Human3.6M, AMSS, and 3DPW datasets, and better performance in uncertainty estimation. The code is available online at https://github.com/vita-epfl/UnPOSed.},
+  arxiv={2304.06707},
+  code={https://github.com/vita-epfl/UnPOSed},
+  abbr={IEEE RA-L 2024},
+  
+}
+
+@article{kumar2025prism,
+  title={Prism: High-resolution \& precise counterfactual medical image generation using language-guided stable diffusion},
+  author={Kumar, Amar and Kriz, Anita and Havaei, Mohammad and Arbel, Tal},
+  journal={arXiv preprint arXiv:2503.00196},
+  year={2025}
+}
+
+@inproceedings{rombach2022high,
+  title={High-resolution image synthesis with latent diffusion models},
+  author={Rombach, Robin and Blattmann, Andreas and Lorenz, Dominik and Esser, Patrick and Ommer, Bj{\"o}rn},
+  booktitle={Proceedings of the IEEE/CVF conference on computer vision and pattern recognition},
+  pages={10684--10695},
+  year={2022}
+}

@@ -34,7 +34,7 @@ ninja.data = [{
         
           title: "Fine-Tuning Foundation Models for Medical Image Analysis",
         
-        description: "A comprehensive guide to adapting foundation models like Stable Diffusion for medical imaging applications",
+        description: "this is what advanced image components could look like",
         section: "Posts",
         handler: () => {
           

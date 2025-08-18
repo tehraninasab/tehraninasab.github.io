@@ -30,15 +30,15 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-fine-tuning-foundation-models-for-medical-image-analysis",
+        },{id: "post-",
         
-          title: "Fine-Tuning Foundation Models for Medical Image Analysis",
+          title: "",
         
-        description: "this is what advanced image components could look like",
+        description: "",
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2025/fine-tuning-foundation-models-for-medical-image-analysis/";
+            window.location.href = "/blog/2025/2025-08-15-fine-tuning-foundation-models-for-medical-image-analysis/";
           
         },
       },{

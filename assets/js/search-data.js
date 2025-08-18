@@ -30,15 +30,15 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-",
+        },{id: "post-foundation-finetune-mastering-diffusion-models-for-medical-ai",
         
-          title: "",
+          title: "Foundation.Finetune(): Mastering Diffusion Models for Medical AI",
         
-        description: "",
+        description: "Submission to MEC 2025 - Insights to Finetuning Foundation Model for Medical Image Synthesis",
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2025/2025-08-15-fine-tuning-foundation-models-for-medical-image-analysis/";
+            window.location.href = "/blog/2025/fine-tuning-foundation-models-for-medical-image-analysis/";
           
         },
       },{

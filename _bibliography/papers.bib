@@ -38,14 +38,15 @@ website={https://neurips.cc/virtual/2025/loc/san-diego/poster/118199}
   website={https://tehraninasab.github.io/sd-latent-traversal/}
 }
 
-@article{tehraninasab2025pixel,
+@inproceedings{tehraninasab2025pixel,
   title={Pixel Perfect MegaMed: A Megapixel-Scale Vision-Language Foundation Model for Generating High Resolution Medical Images},
-  author={TehraniNasab, Zahra and Kumar, Amar and Arbel, Tal},
-  booktitle    = {Deep Generative Models for Medical Image Computing and Computer Assisted Intervention – DGM4MICCAI 2025},
+  author={TehraniNasab, Zahra and Ni, Hujun and Kumar, Amar and Arbel, Tal},
+  booktitle = {MICCAI Workshop on Deep Generative Models},
+  pages={277--287},
   year={2025},
-  preview      = {pixelperfect-megamed-arch.png},
+  organization={Springer},
+  preview = {pixelperfect-megamed-arch.png},
   abstract={Medical image synthesis presents unique challenges due to the inherent complexity and high-resolution details required in clinical contexts. Traditional generative architectures such as Generative Adversarial Networks (GANs) or Variational Auto Encoder (VAEs) have shown great promise for high-resolution image generation but struggle with preserving fine-grained details that are key for accurate diagnosis. To address this issue, we introduce Pixel Perfect MegaMed, the first vision-language foundation model to synthesize images at resolutions of 1024 × 1024. Our method deploys a multi-scale transformer architecture designed specifically for ultra-high resolution medical image generation, enabling the preservation of both global anatomical context and local image-level details. By leveraging vision-language alignment techniques tailored to medical terminology and imaging modalities, Pixel Perfect MegaMed bridges the gap between textual descriptions and visual representations at unprecedented resolution levels. We apply our model to the CheXpert dataset and demonstrate its ability to generate clinically faithful chest X-rays from text prompts. Beyond visual quality, these high-resolution synthetic images prove valuable for downstream tasks such as classification, showing measur- able performance gains when used for data augmentation, particularly in low-data regimes.},
-  note         = {Accepted to DGM4MICCAI workshop at MICCAI 2025},
   arxiv={2507.12698},
   abbr={MICCAI 2025 - DGM4MICCAI},
   website={https://tehraninasab.github.io/pixelperfect-megamed/}
@@ -53,34 +54,30 @@ website={https://neurips.cc/virtual/2025/loc/san-diego/poster/118199}
 }
 
 @inproceedings{tehraninasab2025pixels,
-  author       = {TehraniNasab, Z. and Kumar, A. and Arbel, T.},
-  title        = {Pixels Under Pressure: Exploring Fine-Tuning Paradigms for Foundation Models in High-Resolution Medical Imaging},
-  booktitle    = {Emerging LLM/LMM Applications in Medical Imaging (ELAMI) - Medical Image Computing and Computer Assisted Intervention – MICCAI 2025},
-  year         = {2025},
-  preview      = {pixelupressure-arch.png},
+  title={Pixels Under Pressure: Exploring Fine-Tuning Paradigms for Foundation Models in High-Resolution Medical Imaging},
+  author={TehraniNasab, Zahra and Kumar, Amar and Arbel, Tal},
+  booktitle={International Workshop on Emerging LLM/LMM Applications in Medical Imaging},
+  pages={88--97},
+  year={2025},
+  organization={Springer},
+  preview = {pixelupressure-arch.png},
   abstract={Advancements in diffusion-based foundation models have improved text-to-image generation, yet most efforts have been limited to low-resolution settings. As high-resolution image synthesis becomes increasingly essential for various applications, particularly in medical imaging domains, fine-tuning emerges as a crucial mechanism for adapting these powerful pre-trained models to task-specific requirements and data distributions. In this work, we present a systematic study, examining the impact of various fine-tuning techniques on image generation quality when scaling to high resolution 512x512 pixels. We benchmark a diverse set of fine-tuning methods, including full fine-tuning strategies and parameter-efficient fine-tuning (PEFT). We dissect how different fine-tuning methods influence key quality metrics, including Fréchet Inception Distance (FID), Vendi score, and prompt-image alignment. We also evaluate the utility of generated images in a downstream classification task under data-scarce conditions, demonstrating that specific fine-tuning strategies improve both generation fidelity and downstream performance when synthetic images are used for classifier training and evaluation on real images.},
   arxiv={2508.14931},
   organization = {MICCAI},
-  note         = {Accepted to ELAMI workshop at MICCAI 2025},
   abbr={MICCAI 2025 - ELAMI}
 }
 
-@article{saremi2025rl4med,
-  title={RL4Med-DDPO: Reinforcement Learning for Controlled Guidance Towards Diverse Medical Image Generation using Vision-Language Foundation Models},
-  author={Saremi, Parham and Kumar, Amar and Mohammed, Mohammed and TehraniNasab, Zahra and Arbel, Tal},
-  journal={arXiv preprint arXiv:2503.15784},
+@inproceedings{saremi2025rl4med,
+  title={RL4Med-DDPO: reinforcement learning for controlled guidance towards diverse medical image generation using vision-language foundation models},
+  author={Saremi, Parham and Kumar, Amar and Mohamed, Mohamed and TehraniNasab, Zahra and Arbel, Tal},
+  booktitle={International Conference on Medical Image Computing and Computer-Assisted Intervention},
+  pages={478--488},
   year={2025},
+  organization={Springer},
   preview={rl-sd.jpg},
   abstract={Vision-Language Foundation Models (VLFM) have shown a tremendous increase in performance in terms of generating high-resolution, photorealistic natural images. While VLFMs show a rich understanding of semantic content across modalities, they often struggle with fine-grained alignment tasks that require precise correspondence between image regions and textual descriptions a limitation in medical imaging, where accurate localization and detection of clinical features are essential for diagnosis and analysis. To address this issue, we propose a multi-stage architecture where a pre-trained VLFM provides a cursory semantic understanding, while a reinforcement learning (RL) algorithm refines the alignment through an iterative process that optimizes for understanding semantic context. The reward signal is designed to align the semantic information of the text with synthesized images. We demonstrate the effectiveness of our method on a medical imaging skin dataset where the generated images exhibit improved generation quality and alignment with prompt over the fine-tuned Stable Diffusion. We also show that the synthesized samples could be used to improve disease classifier performance for underrepresented subgroups through augmentation.},
   arxiv={2503.15784},
-  abbr={MICCAI 2025 - Main}
-}
-
-@article{trang2025discovering,
-  title={Discovering Latent Graphs with GFlowNets for Diverse Conditional Image Generation},
-  author={Trang, Bailey and Saremi, Parham and Wang, Alan Q and Huang, Fangrui and TehraniNasab, Zahra and Kumar, Amar and Arbel, Tal and Fei-Fei, Li and Adeli, Ehsan},
-  journal={arXiv preprint arXiv:2510.22107},
-  year={2025}
+  abbr={MICCAI 2025}
 }
 
 @article{saadatnejad2024toward,

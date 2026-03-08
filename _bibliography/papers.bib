@@ -14,6 +14,17 @@
   website={https://amarkr1.github.io/pikachu/}
 }
 
+@inproceedings{trang2025discovering,
+title={Discovering Latent Graphs with {GF}lowNets for Diverse Conditional Image Generation},
+author={Bailey Trang and Parham Saremi and Alan Q. Wang and Fangrui Huang and Zahra TehraniNasab and Amar Kumar and Tal Arbel and Li Fei-Fei and Ehsan Adeli},
+booktitle={The Thirty-ninth Annual Conference on Neural Information Processing Systems (NeurIPS)},
+year={2025},
+preview={knowledge_graph_with_gflownet.png},
+abstract={Capturing diversity is crucial in conditional and prompt-based image generation, particularly when conditions contain uncertainty that can lead to multiple plausible outputs. To generate diverse images reflecting this diversity, traditional methods often modify random seeds, making it difficult to discern meaningful differences between samples, or diversify the input prompt, which is limited in verbally interpretable diversity. We propose \modelnamenospace, a novel conditional image generation framework, applicable to any pretrained conditional generative model, that addresses inherent condition/prompt uncertainty and generates diverse plausible images. \modelname is based on a simple yet effective idea: decomposing the input condition into diverse latent representations, each capturing an aspect of the uncertainty and generating a distinct image. First, we integrate a latent graph, parameterized by Generative Flow Networks (GFlowNets), into the prompt representation computation. Second, leveraging GFlowNets' advanced graph sampling capabilities to capture uncertainty and output diverse trajectories over the graph, we produce multiple trajectories that collectively represent the input condition, leading to diverse condition representations and corresponding output images. Evaluations on natural image and medical image datasets demonstrate \modelnamenospace’s improvement in both diversity and fidelity across image synthesis, image generation, and counterfactual generation tasks.},
+abbr={NeurIPS 2025},
+url={https://openreview.net/forum?id=PhHrlDKcx1}
+}
+
 @article{tehraninasab2025language,
   title={Language-Guided Trajectory Traversal in Disentangled Stable Diffusion Latent Space for Factorized Medical Image Generation},
   author={TehraniNasab, Zahra and Kumar, Amar and Arbel, Tal},

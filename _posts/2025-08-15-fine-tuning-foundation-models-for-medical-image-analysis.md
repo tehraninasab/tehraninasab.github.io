@@ -18,7 +18,6 @@ A foundation model can be **multimodal**, meaning it can handle multiple data ty
 
 Take a text-to-image foundation model like **Stable Diffusion**. Even though it only takes text as input and produces images as output, its pretrained representations allow it to work across many styles — photorealistic, cartoon, anime, abstract art, etc.
 
-
 Here’s an example using the Stable Diffusion web demo ([https://stablediffusionweb.com/](https://stablediffusionweb.com/)):
 
 <style>
@@ -90,6 +89,7 @@ Here’s an example using the Stable Diffusion web demo ([https://stablediffusio
 These models are not only flexible in style but also highly adaptable. With fine-tuning, they can be specialized for **downstream applications** such as **domain-specific image generation** — even for fields like medical imaging.
 
 Our previous work [RL4Med-DDPO](https://parhamsaremi.github.io/rl4med-ddpo/), [Trajectory Traversal](https://tehraninasab.github.io/sd-latent-traversal/) and [Pixel Perfect Megamed](https://tehraninasab.github.io/pixelperfect-megamed/) has shown that by fine-tuning Stable Diffusion on medical datasets (e.g., chest X-rays, skin lesions), we can produce synthetic medical images of striking quality:
+
 <p align="center">
   <img src="/assets/img/finetuning_vlms/real.png" alt="Image 1 Description" width="250">
   &nbsp;&nbsp;&nbsp;&nbsp;
@@ -101,7 +101,6 @@ Our previous work [RL4Med-DDPO](https://parhamsaremi.github.io/rl4med-ddpo/), [T
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <em>Synthetic Image of patient with Pleural Effusion</em>
 </p>
-
 
 Because these models start with rich pretrained representations, adaptation to new tasks often yields excellent results. However, foundation models can be _very large_ (Stable Diffusion 1.5 has ~1.03B parameters), and fine-tuning all of them can be computationally expensive.
 
@@ -118,11 +117,8 @@ Stable Diffusion is a **latent diffusion model**, meaning the diffusion process 
 Stable diffusion has three main components:
 
 1. **VAE (Variational Autoencoder)** – Encodes images into latents and decodes denoised latents back into images.
-    
 2. **Denoising U-Net** – Iteratively denoises the latent representation during generation.
-    
 3. **Text Encoder (CLIP ViT-L/14 in Stable Diffusion 1.5)** – Converts the text prompt into an embedding used to guide image generation via cross-attention.
-    
 
 When fine-tuning, a natural question arises: _Do we need to update all components?_
 
@@ -134,7 +130,6 @@ Yet when we encode and decode an actual chest X-ray without fine-tuning, the VAE
 Similarly, while the CLIP text encoder wasn’t trained specifically on medical terminology, it can still parse prompts like “chest X-ray” well enough to guide generation. For domain-specific improvements, however, one could replace it with medical variants like **BioCLIP** or **MedCLIP**.
 
 On the other hand, the core generative power of Stable Diffusion comes from the **denoising U-Net**. This component is responsible for shaping the image during the iterative denoising process, so if the goal is to generate domain-specific images, the U-Net is the most critical part to fine-tune. The table below shows the performance of various fine-tuning configurations and their impact on the quality of the generated images.
-
 
 <!-- Fine-tuning Strategies Table -->
 <div align="center">
@@ -251,7 +246,6 @@ On the other hand, the core generative power of Stable Diffusion comes from the 
   </p>
 </div>
 
-
 **When Compute is Limited: Parameter-Efficient Fine-Tuning**
 
 In the previous section, the results show that the best performance is achieved when fine-tuning only the U-Net component. However, even when focusing solely on the U-Net, we’re still dealing with roughly **860 million parameters** — a substantial computational load. So, what can we do when resources are limited? One solution is to train only a small subset of parameters needed to adapt the model to the new domain. This method is called **Parameter Efficient Fine-Tuning** or **PEFT**.
@@ -259,25 +253,17 @@ In the previous section, the results show that the best performance is achieved 
 PEFT methods as an alternative to full module fine-tuning:
 
 - **Layer selection** – Train only certain layers.
-    
 - **Low-rank adaptation** – Insert small trainable modules (e.g., LoRA, DoRA) into the network.
-    
 - **Bias-only tuning** – Update only bias terms (BitFit).
-    
 - **Diffusion-specific PEFT** – Targeted adaptations for diffusion architectures (DiffFit).
-    
 
 Our experiments show that although still full U-Net finetuning offers the best performance but LoRA and DoRA can approach full U-Net performance with only a fraction of the trainable parameters, making them attractive for low-resource scenarios.
-
-
 
 # Diffusion Model Fine-tuning Tutorial
 
 A comprehensive guide to fine-tune diffusion models for custom image generation tasks.
 
 This tutorial provides comprehensive guidance for reproducing the experimental results and methodologies presented in our research paper **"Pixels Under Pressure: Exploring Fine-Tuning Paradigms for Foundation Models in High-Resolution Medical Imaging"**, which will be published in the workshop proceedings of ELAMI at MICCAI 2025. The paper systematically investigates various fine-tuning strategies for adapting Stable Diffusion models to medical image generation tasks, comparing parameter-efficient methods (LoRA, DoRA, BitFit) against full fine-tuning approaches across different model components (U-Net, VAE, Text Encoder). All the training configurations, evaluation metrics, and implementation details described in this tutorial directly correspond to the experimental setup used in our research. For the complete implementation and to access the exact code used in our experiments, please visit the official repository at: https://github.com/tehraninasab/PixelUPressure.git
-
-
 
 ## Table of Contents
 
@@ -304,12 +290,14 @@ This repository provides tools and scripts for fine-tuning diffusion models usin
 ## Prerequisites
 
 ### System Requirements
+
 - Python 3.8 or higher
 - CUDA-compatible GPU with at least 12GB VRAM (recommended)
 - 32GB+ RAM for large datasets
 - 50GB+ available disk space
 
 ### Required Knowledge
+
 - Basic understanding of deep learning concepts
 - Familiarity with PyTorch
 - Understanding of diffusion models (DDPM, DDIM)
@@ -317,18 +305,21 @@ This repository provides tools and scripts for fine-tuning diffusion models usin
 ## Installation
 
 ### Step 1: Clone the Repository
+
 ```bash
 git clone https://github.com/tehraninasab/PixelUPressure.git
 cd PixelUPressure
 ```
 
 ### Step 2: Create Virtual Environment
+
 ```bash
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
 ### Step 3: Install Dependencies
+
 ```bash
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 pip install diffusers transformers accelerate
@@ -338,6 +329,7 @@ pip install datasets huggingface-hub
 ```
 
 ### Step 4: Verify Installation
+
 ```bash
 python -c "import torch; print(torch.cuda.is_available())"
 ```
@@ -345,7 +337,9 @@ python -c "import torch; print(torch.cuda.is_available())"
 ## Dataset Preparation
 
 ### Step 1: Organize Your Dataset
+
 Create the following directory structure:
+
 ```
 data/
 ├── images/
@@ -358,53 +352,65 @@ data/
 ```
 
 ### Step 2: Prepare Image Captions
+
 Each image should have a corresponding text file with descriptive captions:
+
 ```bash
 # Example: image1.txt
 Chest x-ray of a patient with Pleural Effusion
 ```
 
-
 ## Fine-tuning Methods
 
 ### Method 1: BitFit Fine-tuning
+
 Efficient fine-tuning by only updating bias parameters:
+
 ```bash
 chmod +x bitfit.sh
 ./bitfit.sh
 ```
 
 **Configuration Options:**
+
 - Learning rate: 1e-4 to 5e-4
 - Batch size: 4-8 (depending on GPU memory)
 - Training steps: 1000-5000
 
 ### Method 2: DoRA Fine-tuning
+
 Weight-Decomposed Low-Rank Adaptation:
+
 ```bash
 chmod +x dora.sh
 ./dora.sh
 ```
 
 **Recommended Settings:**
+
 - Rank: 16-64
 - Alpha: 32-128
 - Dropout: 0.1
 
 ### Method 3: LoRA Fine-tuning
+
 Low-Rank Adaptation for parameter-efficient training:
+
 ```bash
 chmod +x lora.sh
 ./lora.sh
 ```
 
 **Key Parameters:**
+
 - LoRA rank: 4-16 for most tasks
 - LoRA alpha: 16-32
 - Target modules: attention layers
 
 ### Method 4: Full UNet Fine-tuning
+
 Complete UNet model fine-tuning:
+
 ```bash
 chmod +x finetune_unet.sh
 ./finetune_unet.sh
@@ -413,21 +419,27 @@ chmod +x finetune_unet.sh
 **Warning:** Requires significant GPU memory (16GB+ recommended)
 
 ### Method 5: VAE Fine-tuning
+
 Fine-tune the Variational Autoencoder component:
+
 ```bash
 chmod +x finetune_vae.sh
 ./finetune_vae.sh
 ```
 
 ### Method 6: Combined UNet+VAE Fine-tuning
+
 Fine-tune both UNet and VAE components:
+
 ```bash
 chmod +x finetune_unet+vae+text.sh
 ./finetune_unet+vae+text.sh
 ```
 
 ### Method 7: Text Encoder Fine-tuning
+
 Fine-tune the text encoder for better prompt understanding:
+
 ```bash
 chmod +x finetune_text.sh
 ./finetune_text.sh
@@ -436,7 +448,9 @@ chmod +x finetune_text.sh
 ## Training Process
 
 ### Step 1: Choose Your Fine-tuning Method
+
 Select based on your requirements:
+
 - **BitFit/LoRA/DoRA**: For limited computational resources
 - **Full UNet**: For maximum customization with sufficient resources
 - **VAE**: For improving image quality and style
@@ -445,6 +459,7 @@ Select based on your requirements:
 ### Step 2: Configure Training Parameters
 
 Edit the respective shell script to modify:
+
 ```bash
 # Common parameters
 LEARNING_RATE=5e-6
@@ -457,6 +472,7 @@ CHECKPOINTING_STEPS=500
 ```
 
 ### Step 3: Start Training
+
 ```bash
 # Example for LoRA fine-tuning
 chmod +x lora.sh
@@ -464,7 +480,9 @@ chmod +x lora.sh
 ```
 
 ### Step 4: Monitor Training
+
 View progress using:
+
 ```bash
 # TensorBoard
 tensorboard --logdir=./logs
@@ -474,7 +492,9 @@ wandb login
 ```
 
 ### Step 5: Training Checkpoints
+
 Models are automatically saved at regular intervals in:
+
 ```
 outputs/
 ├── checkpoint-500/
@@ -485,18 +505,24 @@ outputs/
 ## Evaluation
 
 ### Step 1: Visual Inspection
+
 Generate sample images:
+
 ```bash
 python evaluate.py --generate-samples --num-samples 10 --prompt "your test prompt"
 ```
+
 ### Step 2: Quality Metrics
+
 The evaluation script computes:
+
 - **FID Score**: Fréchet Inception Distance
 - **CLIP Score**: Text-image similarity
 
 ## Inference
 
 ### Step 1: Load Fine-tuned Model
+
 ```python
 from diffusers import StableDiffusionPipeline
 import torch
@@ -509,6 +535,7 @@ pipeline = StableDiffusionPipeline.from_pretrained(
 ```
 
 ### Step 2: Generate Images
+
 ```python
 # Generate image from text prompt
 prompt = "Your custom prompt here"
@@ -517,11 +544,13 @@ image.save("generated_image.png")
 ```
 
 ### Step 3: Batch Generation
+
 Use the synthesis scripts for batch generation:
+
 ```bash
 # For different model types
 ./synthesis_bitfit.sh      # BitFit models
-./synthesis_dora.sh        # DoRA models  
+./synthesis_dora.sh        # DoRA models
 ./synthesis_lora.sh        # LoRA models
 ./synthesis_unet.sh        # UNet models
 ./synthesis_unet+text.sh   # UNet+Text models
@@ -529,6 +558,7 @@ Use the synthesis scripts for batch generation:
 ```
 
 ### Step 4: Image Synthesis with Custom Settings
+
 ```python
 # Advanced inference options
 image = pipeline(
@@ -545,6 +575,7 @@ image = pipeline(
 ## Configuration Files
 
 ### Training Configuration
+
 Key parameters in your training scripts:
 
 ```bash
@@ -562,7 +593,7 @@ GRADIENT_ACCUMULATION_STEPS=4
 LORA_RANK=16
 LORA_ALPHA=32
 
-# DoRA specific (if applicable)  
+# DoRA specific (if applicable)
 DORA_RANK=32
 DORA_ALPHA=64
 
@@ -578,7 +609,9 @@ USE_8BIT_ADAM=true
 ```
 
 ### Synthesis Configuration
+
 Parameters for image generation:
+
 ```bash
 # Generation settings
 NUM_INFERENCE_STEPS=50
@@ -619,6 +652,7 @@ python synthesize_images.py \
 ### Common Issues and Solutions
 
 #### Out of Memory (OOM) Errors
+
 ```bash
 # Reduce batch size
 TRAIN_BATCH_SIZE=2
@@ -631,12 +665,14 @@ GRADIENT_ACCUMULATION_STEPS=8
 ```
 
 #### Slow Training
+
 - Enable mixed precision: `--mixed_precision=fp16`
 - Use gradient checkpointing
 - Reduce resolution temporarily for testing
 - Enable xFormers: `--enable_xformers_memory_efficient_attention`
 
 #### Poor Quality Results
+
 - Increase training steps
 - Adjust learning rate (try 1e-5 to 1e-4)
 - Improve dataset quality and captions
@@ -644,12 +680,14 @@ GRADIENT_ACCUMULATION_STEPS=8
 - Try different fine-tuning methods
 
 #### Model Not Loading
+
 - Check file paths and permissions
 - Verify model checkpoint integrity
 - Ensure compatible versions of dependencies
 - Check disk space availability
 
 #### Training Stops Unexpectedly
+
 - Monitor GPU temperature and memory usage
 - Check for CUDA errors in logs
 - Ensure stable power supply
@@ -658,6 +696,7 @@ GRADIENT_ACCUMULATION_STEPS=8
 ### Performance Optimization
 
 #### Memory Optimization
+
 ```bash
 # Use 8-bit Adam optimizer
 pip install bitsandbytes
@@ -672,6 +711,7 @@ pip install bitsandbytes
 ```
 
 #### Speed Optimization
+
 ```bash
 # Use xFormers for attention
 pip install xformers
@@ -687,6 +727,7 @@ pip install xformers
 ## Best Practices
 
 ### Dataset Preparation
+
 1. **High-quality images**: Use images with resolution ≥512px
 2. **Consistent style**: Maintain visual consistency across training data
 3. **Descriptive captions**: Write detailed, accurate descriptions
@@ -694,6 +735,7 @@ pip install xformers
 5. **Clean data**: Remove corrupted or irrelevant images
 
 ### Training Tips
+
 1. **Start small**: Begin with a subset of data for initial experiments
 2. **Monitor metrics**: Watch for overfitting via validation loss
 3. **Regular checkpoints**: Save models frequently during training
@@ -701,6 +743,7 @@ pip install xformers
 5. **Progressive training**: Start with lower resolution, then increase
 
 ### Model Selection Guide
+
 - **LoRA**: Best balance of efficiency and quality (recommended for beginners)
 - **BitFit**: Minimal parameters, good for small datasets and quick experiments
 - **DoRA**: Advanced technique, potentially better than LoRA but requires more experimentation
@@ -759,6 +802,7 @@ pip install xformers
 ## Advanced Usage
 
 ### Multi-GPU Training
+
 ```bash
 # Using accelerate for multi-GPU training
 accelerate config
@@ -766,13 +810,17 @@ accelerate launch your_training_script.py
 ```
 
 ### Custom Loss Functions
+
 Modify training scripts to use custom loss functions for specific tasks:
+
 - Perceptual loss for style transfer
 - CLIP loss for better text alignment
 - Adversarial loss for improved realism
 
 ### Hyperparameter Sweeps
+
 Use tools like Weights & Biases for automated hyperparameter optimization:
+
 ```bash
 wandb sweep sweep_config.yaml
 wandb agent <sweep_id>
@@ -781,17 +829,20 @@ wandb agent <sweep_id>
 ## Additional Resources
 
 ### Documentation
+
 - [Diffusers Documentation](https://huggingface.co/docs/diffusers)
 - [Transformers Library](https://huggingface.co/docs/transformers)
 - [Accelerate Documentation](https://huggingface.co/docs/accelerate)
 
 ### Research Papers
+
 - [LoRA: Low-Rank Adaptation](https://arxiv.org/abs/2106.09685)
 - [DoRA: Weight-Decomposed Low-Rank Adaptation](https://arxiv.org/abs/2402.09353)
 - [Stable Diffusion](https://arxiv.org/abs/2112.10752)
 - [BitFit: Simple Parameter-efficient Fine-tuning](https://arxiv.org/abs/2106.10199)
 
 ### Community Resources
+
 - [Hugging Face Community](https://huggingface.co/spaces)
 - [Diffusion Model Papers](https://github.com/heejkoo/Awesome-Diffusion-Models)
 - [Training Tips and Tricks](https://huggingface.co/blog/dreambooth)
@@ -809,6 +860,7 @@ We welcome contributions! Please follow these steps:
 7. Open a Pull Request
 
 ### Development Setup
+
 ```bash
 # Install development dependencies
 pip install -r requirements-dev.txt
@@ -826,6 +878,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Support
 
 For questions and support:
+
 - **GitHub Issues**: Report bugs and request features
 - **Discussions**: Ask questions and share experiences
 - **Documentation**: Check the troubleshooting section above
@@ -834,10 +887,10 @@ For questions and support:
 ## Changelog
 
 ### Version 1.0.0
+
 - Initial release with support for BitFit, LoRA, DoRA, UNet, and VAE fine-tuning
 - Comprehensive evaluation and synthesis scripts
 - Multi-GPU training support
 - Detailed documentation and examples
 
 ---
-
